@@ -1,4 +1,4 @@
-package com.epam.training.sportsbetting.domain;
+package com.sportsbetting.domain;
 
 import java.time.LocalDateTime;
 import java.util.List;

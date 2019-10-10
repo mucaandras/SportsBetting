@@ -1,7 +1,7 @@
-package com.epam.training.sportsbetting;
+package com.sportsbetting;
 
-import com.epam.training.sportsbetting.service.SportsBettingService;
-import com.epam.training.sportsbetting.view.View;
+import com.sportsbetting.service.SportsBettingService;
+import com.sportsbetting.view.View;
 
 public class App {
 
