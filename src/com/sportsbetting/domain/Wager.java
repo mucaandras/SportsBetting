@@ -48,7 +48,6 @@ public class Wager {
         return outComeOdd;
     }
 
-
     @Override
     public String toString()
     {
@@ -56,5 +55,4 @@ public class Wager {
                 + this.outComeOdd.getOutCome().getBet().getSportEvent().getTitle() + " [odd: " + this.getOutComeOdd().getValue() + " amount: "
                 + this.getAmount() + "]";
     }
-
 }

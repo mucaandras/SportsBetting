@@ -23,15 +23,15 @@ public class View {
 
         playerBuilder.setBalance(new BigDecimal(in.nextLine()));
 
-        System.out.println("What is your currency? (HUF, EUR or USD");
+        System.out.println("What is your currency? (HUF, EUR or USD)");
 
         String currency = in.nextLine();
 
-        if (currency == "EUR")
+        if (currency.equals("EUR"))
         {
             playerBuilder.setCurrency(Currency.EUR);
         }
-        else if(currency == "USD")
+        else if  (currency.equals("USD"))
         {
             playerBuilder.setCurrency(Currency.USD);
         }
@@ -114,11 +114,11 @@ public class View {
 
     public void printResults(Player player,List<Wager> wagers)
     {
-        System.out.println("Results");
+        System.out.println("Results:");
 
         for(Wager wager : wagers)
         {
-            System.out.println(wager +", win:" + wager.getWin());
+            System.out.println(wager +", win: " + wager.getWin());
         }
 
         printBalance(player);

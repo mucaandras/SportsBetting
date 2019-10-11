@@ -1,12 +1,11 @@
 package com.sportsbetting;
 
-import com.sportsbetting.domain.Player;
 import com.sportsbetting.domain.Wager;
 import com.sportsbetting.domain.builders.WagerBuilder;
 import com.sportsbetting.service.SportsBettingService;
 import com.sportsbetting.view.View;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class App {
 
@@ -50,8 +49,9 @@ public class App {
             WagerBuilder wagerbuilder = new WagerBuilder()
                     .setOutComeOdd(view.selectOutcomeOdd(service.findAllSportEvents()))
                     .setPlayer(service.FindPlayer())
+                    .setTimestampCreated(LocalDateTime.now())
+                    .setProcessed(false)
                     .setCurrency(service.FindPlayer().getCurrency());
-
 
             if (wagerbuilder.getOutComeOdd() == null)
             {
@@ -63,14 +63,9 @@ public class App {
             }
 
             Wager wager = wagerbuilder.getWager();
-
             service.saveWager(wager);
-
             view.printWagerSaved(wager);
-
             view.printBalance(service.FindPlayer());
-            /* kiegészíteni */
-
         }
     }
 

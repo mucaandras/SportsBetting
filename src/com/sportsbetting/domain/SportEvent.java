@@ -38,7 +38,7 @@ public class SportEvent {
     @Override
     public String toString()
     {
-        String text = "";
+        StringBuilder text = new StringBuilder();
 
         int counter = 1;
 
@@ -48,12 +48,12 @@ public class SportEvent {
             {
                 for(Outcomeodd outcomeodd : outcome.getOutcomeodds())
                 {
-                    text += counter++ + ": Sport event: " + this.title + " (start: " + startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ") "  + bet.toString()  + outcome.toString() + outcomeodd.toString() + System.lineSeparator();
+                    text.append(counter++).append(": Sport event: ").append(this.title).append(" (start: ").append(startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append(") ").append(bet.toString()).append(outcome.toString()).append(outcomeodd.toString()).append(System.lineSeparator());
                 }
             }
         }
 
-        return text;
+        return text.toString();
 
     }
 }

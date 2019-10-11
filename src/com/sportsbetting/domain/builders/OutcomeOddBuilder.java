@@ -21,7 +21,6 @@ public class OutcomeOddBuilder
 
     public OutcomeOddBuilder()
     {
-
     }
 
     public BigDecimal getValue() {

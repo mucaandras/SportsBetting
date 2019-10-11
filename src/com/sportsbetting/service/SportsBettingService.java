@@ -136,7 +136,7 @@ public class SportsBettingService {
 
         for (Wager wager : wagers)
         {
-            if(r.nextInt(1) == 0)
+            if(r.nextBoolean())
             {
                 wager.setWin(true);
                 player.setBalance(player.getBalance().add(wager.getAmount().multiply(wager.getOutComeOdd().getValue())));
@@ -147,6 +147,4 @@ public class SportsBettingService {
             }
         }
     }
-
-
 }
