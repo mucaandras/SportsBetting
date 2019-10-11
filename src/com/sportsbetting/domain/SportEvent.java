@@ -1,6 +1,9 @@
 package com.sportsbetting.domain;
 
+import com.sportsbetting.domain.builders.SportEventBuilder;
+
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class SportEvent {
@@ -15,54 +18,42 @@ public class SportEvent {
 
     private Result result;
 
-    public SportEvent(String title,LocalDateTime startDate, LocalDateTime endDate, List<Bet> bets, Result result)
+    public SportEvent(SportEventBuilder sportEventBuilder)
     {
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.bets = bets;
-        this.result = result;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDateTime getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
+        this.title = sportEventBuilder.getTitle();
+        this.startDate = sportEventBuilder.getStartDate();
+        this.endDate = sportEventBuilder.getEndDate();
+        this.bets = sportEventBuilder.getBets();
     }
 
     public List<Bet> getBets() {
         return bets;
     }
 
-    public void setBets(List<Bet> bets) {
-        this.bets = bets;
+    public String getTitle()
+    {
+        return this.title;
     }
 
-    public Result getResult() {
-        return result;
+    @Override
+    public String toString()
+    {
+        String text = "";
+
+        int counter = 1;
+
+        for (Bet bet : bets)
+        {
+            for(Outcome outcome : bet.getOutcomes())
+            {
+                for(Outcomeodd outcomeodd : outcome.getOutcomeodds())
+                {
+                    text += counter++ + ": Sport event: " + this.title + " (start: " + startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ") "  + bet.toString()  + outcome.toString() + outcomeodd.toString() + System.lineSeparator();
+                }
+            }
+        }
+
+        return text;
+
     }
-
-    public void setResult(Result result) {
-        this.result = result;
-    }
-
-
 }

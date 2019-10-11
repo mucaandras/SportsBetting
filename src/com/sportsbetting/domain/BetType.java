@@ -1,6 +1,6 @@
 package com.sportsbetting.domain;
 
-enum BetType {
+public enum BetType {
 
     WINNERS,
     GOALS,

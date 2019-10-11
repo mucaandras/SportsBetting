@@ -1,9 +1,13 @@
 package com.sportsbetting.domain;
 
+import com.sportsbetting.domain.builders.PlayerBuilder;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Player extends User {
+
+    private static int accountCount = 0;
 
     private String name;
 
@@ -13,43 +17,30 @@ public class Player extends User {
 
     private LocalDateTime birth;
 
-    public Player(String email, String password,String name,int accountNumber,BigDecimal balance, LocalDateTime birth) {
-        super(email, password);
-        this.setName(name);
-        this.setAccountNumber(accountNumber);
-        this.setBalance(balance);
-        this.setBirth(birth);
+    private Currency currency;
+
+    public Player(PlayerBuilder playerBuilder)
+    {
+        this.accountNumber = accountCount++;
+        this.name = playerBuilder.getName();
+        this.setBalance(playerBuilder.getBalance());
+        this.currency = playerBuilder.getCurrency();
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
     public BigDecimal getBalance() {
         return balance;
     }
 
+    public Currency getCurrency()
+    {
+        return currency;
+    }
+
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
-    }
-
-    public LocalDateTime getBirth() {
-        return birth;
-    }
-
-    public void setBirth(LocalDateTime birth) {
-        this.birth = birth;
     }
 }

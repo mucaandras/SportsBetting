@@ -4,18 +4,18 @@ import java.util.List;
 
 public class Result {
 
-    private List<OutCome> outComes;
+    private List<Outcome> outcomes;
 
-    public Result(List<OutCome> outComes)
+    public Result(List<Outcome> outcomes)
     {
-        this.setOutComes(outComes);
+        this.setOutcomes(outcomes);
     }
 
-    public List<OutCome> getOutComes() {
-        return outComes;
+    public List<Outcome> getOutcomes() {
+        return outcomes;
     }
 
-    public void setOutComes(List<OutCome> outComes) {
-        this.outComes = outComes;
+    public void setOutcomes(List<Outcome> outcomes) {
+        this.outcomes = outcomes;
     }
 }

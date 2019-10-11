@@ -1,5 +1,7 @@
 package com.sportsbetting.domain;
 
+import com.sportsbetting.domain.builders.BetBuilder;
+
 import java.util.List;
 
 public class Bet {
@@ -10,14 +12,14 @@ public class Bet {
 
     private BetType betType;
 
-    private List<OutCome> outComes;
+    private List<Outcome> outcomes;
 
-    public Bet(SportEvent sportEvent, String description, BetType betType, List<OutCome> outComes)
+    public Bet(BetBuilder betBuilder)
     {
-        this.sportEvent = sportEvent;
-        this.description = description;
-        this.betType = betType;
-        this.outComes = outComes;
+        this.sportEvent = betBuilder.getSportEvent();
+        this.description = betBuilder.getDescription();
+        this.betType = betBuilder.getBetType();
+        this.outcomes = betBuilder.getOutcomes();
     }
 
     public SportEvent getSportEvent() {
@@ -44,11 +46,17 @@ public class Bet {
         this.betType = betType;
     }
 
-    public List<OutCome> getOutComes() {
-        return outComes;
+    public List<Outcome> getOutcomes() {
+        return outcomes;
     }
 
-    public void setOutComes(List<OutCome> outComes) {
-        this.outComes = outComes;
+    public void setOutcomes(List<Outcome> outcomes) {
+        this.outcomes = outcomes;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Bet: " + description;
     }
 }

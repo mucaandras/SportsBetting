@@ -1,6 +1,6 @@
 package com.sportsbetting.domain;
 
-enum Currency{
+public enum Currency{
 
     HUF,
     EUR,
