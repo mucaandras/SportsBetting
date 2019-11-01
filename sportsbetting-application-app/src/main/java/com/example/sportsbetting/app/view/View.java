@@ -11,19 +11,41 @@ public class View {
 
     private Scanner in = new Scanner(System.in);
 
+    private String askname;
+
+    private String  askmoney;
+    private String  askcurrency;
+    private String welcome;
+    private String balance;
+    private String askbet;
+    private String askamount;
+    private String result;
+
+    public View(String askname,String askmoney, String askcurrency, String welcome, String balance, String askbet, String askamount, String result)
+    {
+        this.askname = askname;
+        this.askmoney = askmoney;
+        this.askcurrency = askcurrency;
+        this.welcome = welcome;
+        this.balance = balance;
+        this.askbet = askbet;
+        this.askamount = askamount;
+        this.result = result;
+    }
+
     public Player readPlayerData()
     {
         PlayerBuilder playerBuilder = new PlayerBuilder();
 
-        System.out.println("What is your name?");
+        System.out.println(askname);
 
         playerBuilder.setName(in.nextLine());
 
-        System.out.println("How much money do you have (more than 0)?");
+        System.out.println(askmoney);
 
         playerBuilder.setBalance(new BigDecimal(in.nextLine()));
 
-        System.out.println("What is your currency? (HUF, EUR or USD)");
+        System.out.println(askcurrency);
 
         String currency = in.nextLine();
 
@@ -45,18 +67,18 @@ public class View {
 
     public void printWelcomeMessage(Player player)
     {
-        System.out.println("Welcome " + player.getName());
+        System.out.println(welcome + player.getName());
 
     }
 
     public void printBalance(Player player)
     {
-        System.out.println("Your balance is " + player.getBalance() + " " + player.getCurrency());
+        System.out.println(balance + player.getBalance() + " " + player.getCurrency());
     }
 
     public void printOutcomeOdds(List<SportEvent> sportEvents)
     {
-        System.out.println("What are you want to bet on? (choose a number or press q for quit)");
+        System.out.println(askbet);
         for (SportEvent item : sportEvents)
         {
             System.out.println(item);
@@ -102,7 +124,7 @@ public class View {
 
     public BigDecimal readWagerAmount()
     {
-        System.out.println("What amount do you wish to bet on it?");
+        System.out.println(askamount);
 
         return new BigDecimal(in.nextLine());
     }
@@ -114,7 +136,7 @@ public class View {
 
     public void printResults(Player player,List<Wager> wagers)
     {
-        System.out.println("Results:");
+        System.out.println(result);
 
         for(Wager wager : wagers)
         {

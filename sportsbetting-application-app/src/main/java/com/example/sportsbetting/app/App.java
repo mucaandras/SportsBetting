@@ -1,9 +1,12 @@
 package com.example.sportsbetting.app;
 
+import com.example.sportsbetting.config.AppConfig;
 import com.example.sportsbetting.domain.Wager;
 import com.example.sportsbetting.domain.builders.WagerBuilder;
 import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.app.view.View;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDateTime;
 
@@ -19,11 +22,13 @@ public class App {
         this.view = view;
     }
 
-    public static void main(String[] args)
-    {
-        App app = new App(new SportsBettingService(), new View());
-        app.play();
+    public static void main(String[] args) {
+        try (ConfigurableApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class)) {
+            App app = appContext.getBean(App.class);
+            app.play();
+        }
     }
+
 
     private void play()
     {
