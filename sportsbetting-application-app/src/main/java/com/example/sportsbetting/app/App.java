@@ -1,14 +1,13 @@
 package com.example.sportsbetting.app;
 
-import com.example.sportsbetting.config.AppConfig;
+import com.example.sportsbetting.domain.OutcomeOdd;
+import com.example.sportsbetting.domain.SportEvent;
 import com.example.sportsbetting.domain.Wager;
-import com.example.sportsbetting.domain.builders.WagerBuilder;
 import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.app.view.View;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.util.List;
 
 public class App {
 
@@ -22,18 +21,9 @@ public class App {
         this.view = view;
     }
 
-    public static void main(String[] args) {
-        try (ConfigurableApplicationContext appContext = new AnnotationConfigApplicationContext(AppConfig.class)) {
-            App app = appContext.getBean(App.class);
-            app.play();
-        }
-    }
-
-
-    private void play()
+    public void play()
     {
         createPlayer();
-        service.createTestData();
         doBetting();
         calculateResults();
         printResults();
@@ -48,29 +38,23 @@ public class App {
 
     private void doBetting()
     {
-        while(service.FindPlayer().getBalance().intValue() > 0) {
-            view.printOutcomeOdds(service.findAllSportEvents());
-
-            WagerBuilder wagerbuilder = new WagerBuilder()
-                    .setOutComeOdd(view.selectOutcomeOdd(service.findAllSportEvents()))
-                    .setPlayer(service.FindPlayer())
-                    .setTimestampCreated(LocalDateTime.now())
-                    .setProcessed(false)
-                    .setCurrency(service.FindPlayer().getCurrency());
-
-            if (wagerbuilder.getOutComeOdd() == null)
-            {
-                break;
+        List<SportEvent> events = service.findAllSportEvents();
+        while (service.getData().getPlayer().getBalance().compareTo(BigDecimal.ZERO)
+                > 0){
+            view.printOutcomeOdds(events);
+            OutcomeOdd outcomeOdd = view.selectOutcomeOdd(events);
+            BigDecimal amount = view.readWagerAmount();
+            if (service.getData().getPlayer().getBalance().compareTo(amount) >= 0){
+                Wager wager = new Wager.WagerBuilder()
+                        .setAmount(amount)
+                        .setOutcomeOdd(outcomeOdd)
+                        .setPlayer(service.getData().getPlayer())
+                        .setCurrency(service.getData().getPlayer().getCurrency())
+                        .getWager();
+                view.printWagerSaved(wager);
+                service.saveWager(wager);
+                view.printBalance(service.getData().getPlayer());
             }
-            else
-            {
-                wagerbuilder.setAmount(view.readWagerAmount());
-            }
-
-            Wager wager = wagerbuilder.getWager();
-            service.saveWager(wager);
-            view.printWagerSaved(wager);
-            view.printBalance(service.FindPlayer());
         }
     }
 

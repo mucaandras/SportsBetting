@@ -1,91 +1,81 @@
 package com.example.sportsbetting.app.view;
 
 import com.example.sportsbetting.domain.*;
-import com.example.sportsbetting.domain.builders.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class View {
 
     private Scanner in = new Scanner(System.in);
 
-    private String askname;
+    private Locale locale;
 
-    private String  askmoney;
-    private String  askcurrency;
-    private String welcome;
-    private String balance;
-    private String askbet;
-    private String askamount;
-    private String result;
+    @Autowired
+    private Player.PlayerBuilder builder;
 
-    public View(String askname,String askmoney, String askcurrency, String welcome, String balance, String askbet, String askamount, String result)
+    @Autowired
+    private MessageSource messageSource;
+
+    public View(Locale locale)
     {
-        this.askname = askname;
-        this.askmoney = askmoney;
-        this.askcurrency = askcurrency;
-        this.welcome = welcome;
-        this.balance = balance;
-        this.askbet = askbet;
-        this.askamount = askamount;
-        this.result = result;
+        this.locale = locale;
     }
 
     public Player readPlayerData()
     {
-        PlayerBuilder playerBuilder = new PlayerBuilder();
+        System.out.println(messageSource.getMessage("view.askname",null,locale));
 
-        System.out.println(askname);
+        builder.setName(in.nextLine());
 
-        playerBuilder.setName(in.nextLine());
+        System.out.println(messageSource.getMessage("view.askmoney",null,locale));
 
-        System.out.println(askmoney);
+        builder.setBalance(in.nextLine());
 
-        playerBuilder.setBalance(new BigDecimal(in.nextLine()));
-
-        System.out.println(askcurrency);
+        System.out.println(messageSource.getMessage("view.askcurrency",null,locale));
 
         String currency = in.nextLine();
 
         if (currency.equals("EUR"))
         {
-            playerBuilder.setCurrency(Currency.EUR);
+            builder.setCurrency(Currency.EUR);
         }
         else if  (currency.equals("USD"))
         {
-            playerBuilder.setCurrency(Currency.USD);
+            builder.setCurrency(Currency.USD);
         }
         else
         {
-            playerBuilder.setCurrency(Currency.HUF);
+            builder.setCurrency(Currency.HUF);
         }
 
-        return playerBuilder.getPlayer();
+        return builder.getPlayer();
     }
 
     public void printWelcomeMessage(Player player)
     {
-        System.out.println(welcome + player.getName());
-
+        System.out.println(messageSource.getMessage("view.welcome",null,locale) + player.getName());
     }
 
     public void printBalance(Player player)
     {
-        System.out.println(balance + player.getBalance() + " " + player.getCurrency());
+       System.out.println(messageSource.getMessage("view.balance",null,locale) + player.getBalance() + " " + player.getCurrency());
     }
 
     public void printOutcomeOdds(List<SportEvent> sportEvents)
     {
-        System.out.println(askbet);
+        System.out.println(messageSource.getMessage("view.askbet",null,locale));
         for (SportEvent item : sportEvents)
         {
             System.out.println(item);
         }
     }
 
-    public Outcomeodd selectOutcomeOdd(List<SportEvent> sportEvents)
+    public OutcomeOdd selectOutcomeOdd(List<SportEvent> sportEvents)
     {
         String keyPressed = in.nextLine();
 
@@ -104,7 +94,7 @@ public class View {
                 {
                     for(Outcome outcome : bet.getOutcomes())
                     {
-                        for(Outcomeodd outcomeodd : outcome.getOutcomeodds())
+                        for(OutcomeOdd outcomeodd : outcome.getOutcomeOdds())
                         {
                             if(outcomeOddCount == outcomeOddId)
                             {
@@ -124,19 +114,19 @@ public class View {
 
     public BigDecimal readWagerAmount()
     {
-        System.out.println(askamount);
+        System.out.println(messageSource.getMessage("view.askamount",null,locale));
 
         return new BigDecimal(in.nextLine());
     }
 
     public void printWagerSaved(Wager wager)
     {
-        System.out.println(wager + " saved!");
+        System.out.println(wager.toString() + " saved!");
     }
 
     public void printResults(Player player,List<Wager> wagers)
     {
-        System.out.println(result);
+        System.out.println(messageSource.getMessage("view.results",null,locale));
 
         for(Wager wager : wagers)
         {

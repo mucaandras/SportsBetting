@@ -3,6 +3,9 @@ package com.example.sportsbetting.config;
 import com.example.sportsbetting.app.App;
 import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.app.view.View;
+import com.example.sportsbetting.domain.Data;
+import com.example.sportsbetting.domain.Player;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 
-import javax.inject.Inject;
 import java.util.Locale;
 
 @Configuration
@@ -21,7 +23,7 @@ public class AppConfig {
     @Value("${default.language}")
     private Locale locale;
 
-    @Inject
+    @Autowired
     private MessageSource messageSource;
 
     @Bean
@@ -30,17 +32,8 @@ public class AppConfig {
     }
 
     @Bean
-    public View view() {
-        return new View(
-                getAskNameMessage(),
-                getAskMoney(),
-                getAskCurrency(),
-                getWelcome(),
-                getBalance(),
-                getAskBet(),
-                getAskAmount(),
-                getResults()
-        );
+    public View view(){
+        return new View(locale);
     }
 
     @Bean
@@ -49,44 +42,15 @@ public class AppConfig {
         return new App(sportsBettingService(),view());
     }
 
-    public String getAskNameMessage()
-    {
-        return messageSource.getMessage("view.askname",null,locale);
-    }
+    @Bean(initMethod = "generateTestData")
+    public Data data()
+   {
+       return new Data();
+   }
 
-    public String getAskMoney()
-    {
-        return messageSource.getMessage("view.askmoney",null,locale);
-    }
-
-    public String getAskCurrency()
-    {
-        return messageSource.getMessage("view.askcurrency",null,locale);
-    }
-
-    public String getWelcome()
-    {
-        return messageSource.getMessage("view.welcome",null,locale);
-    }
-
-    public String getBalance()
-    {
-        return messageSource.getMessage("view.balance",null,locale);
-    }
-
-    public String getAskBet()
-    {
-        return messageSource.getMessage("view.askbet",null,locale);
-    }
-
-    public String getAskAmount()
-    {
-        return messageSource.getMessage("view.askamount",null,locale);
-    }
-
-    public String getResults()
-    {
-        return messageSource.getMessage("view.results",null,locale);
+    @Bean
+    public Player.PlayerBuilder playerBuilder(){
+        return new Player.PlayerBuilder();
     }
 
 

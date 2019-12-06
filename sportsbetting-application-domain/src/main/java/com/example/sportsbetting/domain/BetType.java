@@ -5,6 +5,6 @@ public enum BetType {
     WINNERS,
     GOALS,
     PLAYERS_SCORE,
-    NUMBER_OF_SEATS
+    NUMBER_OF_SETS
 
 }
