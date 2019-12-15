@@ -8,10 +8,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
-    public ModelAndView getDefaultPage() {
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+    public ModelAndView loginPage() {
         ModelAndView model = new ModelAndView();
         model.setViewName("login");
         return model;
     }
+
+
+
+
 }

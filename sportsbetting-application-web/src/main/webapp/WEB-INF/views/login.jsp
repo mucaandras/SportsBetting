@@ -1,42 +1,46 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-
-    <title>Signin Template for Bootstrap</title>
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
-
-    <!-- Bootstrap core CSS -->
-    <link href="bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
-  </head>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page isELIgnored="false" %>
+<html>
+<head >
+    <title>SportsBet - Login</title>
+    <link href='<spring:url value="/resources/bootstrap.min.css"/>' rel="stylesheet" />
+    <link href='<spring:url value="/resources/login.css"/>' rel="stylesheet" />
+</head>
+<body>
 
 
-  <div class=container>
-        
-  <body class="text-center">
-      
-   <h1 class="h1 mb-3 font-weight-normal">Welcome to SportsBet!</h1>
-   <h1 class="h5 mb-3 font-weight-normal">Sports betting is the activity of predicting sports results and placing a wager on the outcome.</h1>
-
-    <form class="form-signin">
-      <label for="inputEmail" class="sr-only">Email</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </form>
-  </body>
+<div class="header">
+    <h1>Welcome to SportsBet</h1>
+    <p>Sports betting is the activity of predicting sports results and placing a wager on the outcome.</p>
+</div>
+<div class="w-75 p-3 mx-auto">
+    <br>
+    <h2>
+        Login or Register to start!
+    </h2>
+    <br>
+    <div class="w-25" >
+        <div class="container">
+            <div class="card">
+                <div class="card-header text-white" style="background-color: #037AFB;">
+                    Login
+                </div>
+                <div class="card-body">
+                    <form name="f"  action="/login" method="post">
+                        <div class="form-group">
+                            <input type="text" id="username" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 </html>

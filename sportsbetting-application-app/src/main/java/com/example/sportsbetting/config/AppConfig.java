@@ -50,6 +50,7 @@ public class AppConfig {
 
     @Bean
     public Player.PlayerBuilder playerBuilder(){
+
         return new Player.PlayerBuilder();
     }
 

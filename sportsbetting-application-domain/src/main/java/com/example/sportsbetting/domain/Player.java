@@ -28,7 +28,7 @@ public class Player extends User {
     public Player(PlayerBuilder playerBuilder)
     {
         this.accountNumber = accountCount++;
-        this.name = playerBuilder.getName();
+        this.setName(playerBuilder.getName());
         this.setBalance(playerBuilder.getBalance());
         this.currency = playerBuilder.getCurrency();
     }
@@ -48,6 +48,10 @@ public class Player extends User {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public static class PlayerBuilder
