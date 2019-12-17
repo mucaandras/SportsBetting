@@ -2,7 +2,9 @@ package com.example.sportsbetting.domain;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Player extends User {
@@ -33,6 +35,11 @@ public class Player extends User {
         this.currency = playerBuilder.getCurrency();
     }
 
+    public Player()
+    {
+
+    }
+
     public String getName() {
         return name;
     }
@@ -58,8 +65,10 @@ public class Player extends User {
         return birth;
     }
 
-    public void setBirth(LocalDateTime birth) {
-        this.birth = birth;
+    public void setBirth(String birth) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate ld = LocalDate.parse(birth, formatter);
+        this.birth = ld.atStartOfDay();
     }
 
     public int getAccountNumber() {
@@ -68,6 +77,25 @@ public class Player extends User {
 
     public void setAccountNumber(int accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setCurrency(String currency) {
+
+        switch(currency) {
+            case "HUF":
+                this.currency = Currency.HUF;
+                break;
+            case "EUR":
+                this.currency = Currency.EUR;
+                break;
+            default:
+                this.currency = Currency.USD;
+                break;
+        }
     }
 
     public static class PlayerBuilder

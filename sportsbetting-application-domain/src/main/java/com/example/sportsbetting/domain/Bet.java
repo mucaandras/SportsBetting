@@ -12,7 +12,7 @@ public class Bet {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "eventid")
+    @JoinColumn(name = "SportEventID")
     private SportEvent sportEvent;
 
     private String description;

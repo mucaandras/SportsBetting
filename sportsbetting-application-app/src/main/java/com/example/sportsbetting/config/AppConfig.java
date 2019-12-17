@@ -4,7 +4,6 @@ import com.example.sportsbetting.app.App;
 import com.example.sportsbetting.app.service.SportsBettingService;
 import com.example.sportsbetting.app.view.View;
 import com.example.sportsbetting.domain.Data;
-import com.example.sportsbetting.domain.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -26,7 +25,7 @@ public class AppConfig {
     @Autowired
     private MessageSource messageSource;
 
-    @Bean
+    @Bean(initMethod = "Initialize")
     public SportsBettingService sportsBettingService() {
         return new SportsBettingService();
     }
@@ -39,7 +38,7 @@ public class AppConfig {
     @Bean
     public App app()
     {
-        return new App(sportsBettingService(),view());
+        return new App();
     }
 
     @Bean(initMethod = "generateTestData")
@@ -47,15 +46,5 @@ public class AppConfig {
    {
        return new Data();
    }
-
-    @Bean
-    public Player.PlayerBuilder playerBuilder(){
-
-        return new Player.PlayerBuilder();
-    }
-
-
-
-
 
 }

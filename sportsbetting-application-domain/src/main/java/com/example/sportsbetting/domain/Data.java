@@ -70,7 +70,7 @@ public class Data {
                 .getOutcome();
 
         Bet bet1 = new Bet.BetBuilder()
-                .setDescription("player Oliver Giroud")
+                .setDescription("player Oliver Giroud score")
                 .setBetType(BetType.PLAYERS_SCORE)
                 .addOutcome(outcome1)
                 .getBet();

@@ -1,20 +1,11 @@
 package com.example.sportsbetting.web.configuration;
 
-import com.example.sportsbetting.app.App;
 import com.example.sportsbetting.app.service.SportsBettingService;
-import com.example.sportsbetting.config.AppConfig;
-import com.example.sportsbetting.config.JpaConfig;
 import com.example.sportsbetting.domain.Data;
-import com.example.sportsbetting.domain.Player;
-import com.example.sportsbetting.domain.SportEvent;
-import com.example.sportsbetting.repository.SportEventRepository;
 import com.example.sportsbetting.web.configuration.security.SecurityConfig;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.core.Ordered;
-import org.springframework.http.CacheControl;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -22,8 +13,6 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-
-import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableWebMvc
@@ -48,12 +37,6 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
-    @Bean
-    public Player player(){
-        return new Player.PlayerBuilder()
-                .setName("test")
-                .getPlayer();
-    }
 
     @Bean("messageSource")
     public MessageSource messageSource() {
@@ -84,10 +67,9 @@ public class WebConfig implements WebMvcConfigurer {
         return new Data();
     }
 
-    @Bean(initMethod ="SaveSportEvents")
+    @Bean(initMethod ="Initialize")
     public SportsBettingService sportsBettingService()
     {
         return new SportsBettingService();
     }
-
 }

@@ -1,7 +1,5 @@
  package com.example.sportsbetting.web.configuration.security;
 
-import com.example.sportsbetting.domain.Player;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,9 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private Player player;
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -25,7 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("user")
                 .password(passwordEncoder().encode("password"))
                 .roles("USER");
-        System.out.println(player.getName());
     }
 
     @Override

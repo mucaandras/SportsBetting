@@ -13,7 +13,7 @@ public class SportsBettingService {
 
 
     @Autowired
-    private PlayerRepository playerRepository;
+    public PlayerRepository playerRepository;
 
     @Autowired
     private SportEventRepository sportEventRepository;
@@ -24,12 +24,11 @@ public class SportsBettingService {
     @Autowired
     private Data data;
 
-    public void SaveSportEvents()
+    public void Initialize()
     {
         sportEventRepository.saveAll(data.getSportEvents());
+        savePlayer(new Player());
     }
-
-
 
 
     public void savePlayer(Player player)
@@ -37,9 +36,14 @@ public class SportsBettingService {
       playerRepository.save(player);
     }
 
+    public void deletePlayerById(int id)
+    {
+        playerRepository.deleteById(id);
+    }
+
     public Player FindPlayer()
     {
-         return playerRepository.findById(0).get();
+         return playerRepository.findById(1).get();
     }
 
     public List<SportEvent> findAllSportEvents()

@@ -41,7 +41,7 @@ public class Wager {
     {
         this.amount = wagerbuilder.getAmount();
         this.timestampCreated = wagerbuilder.getTimestampCreated();
-        this.processed = wagerbuilder.isProcessed();
+        this.setProcessed(wagerbuilder.isProcessed());
         this.win = wagerbuilder.win;
         this.outcomeOdd = wagerbuilder.getOutcomeOdd();
         this.player = wagerbuilder.getPlayer();
@@ -75,6 +75,14 @@ public class Wager {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
     }
 
     public static  class WagerBuilder

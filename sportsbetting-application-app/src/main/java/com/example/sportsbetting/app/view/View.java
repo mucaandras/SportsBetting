@@ -15,8 +15,6 @@ public class View {
 
     private Locale locale;
 
-    @Autowired
-    private Player.PlayerBuilder builder;
 
     @Autowired
     private MessageSource messageSource;
@@ -26,34 +24,23 @@ public class View {
         this.locale = locale;
     }
 
-    public Player readPlayerData()
+    public Player readPlayerData(Player player)
     {
         System.out.println(messageSource.getMessage("view.askname",null,locale));
 
-        builder.setName(in.nextLine());
+        player.setName(in.nextLine());
 
         System.out.println(messageSource.getMessage("view.askmoney",null,locale));
 
-        builder.setBalance(in.nextLine());
+        player.setBalance(new BigDecimal(in.nextLine()));
 
         System.out.println(messageSource.getMessage("view.askcurrency",null,locale));
 
         String currency = in.nextLine();
 
-        if (currency.equals("EUR"))
-        {
-            builder.setCurrency(Currency.EUR);
-        }
-        else if  (currency.equals("USD"))
-        {
-            builder.setCurrency(Currency.USD);
-        }
-        else
-        {
-            builder.setCurrency(Currency.HUF);
-        }
+        player.setCurrency(currency);
 
-        return builder.getPlayer();
+        return player;
     }
 
     public void printWelcomeMessage(Player player)

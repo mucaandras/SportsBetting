@@ -16,12 +16,7 @@ public class AppSpring {
 
             App app = appContext.getBean(App.class);
 
-            SportEventRepository sportEventRepository = appContext.getBean(SportEventRepository.class);
-
-            sportEventRepository.saveAll(appContext.getBean(Data.class).getSportEvents());
-
             app.play();
-
         }
     }
 }

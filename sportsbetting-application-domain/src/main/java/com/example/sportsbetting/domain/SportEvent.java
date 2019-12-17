@@ -67,13 +67,17 @@ public class SportEvent {
             {
                 for(OutcomeOdd outcomeodd : outcome.getOutcomeOdds())
                 {
-                    text.append(counter++).append(": Sport event: ").append(this.title).append(" (start: ").append(startDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append(") ").append(bet.toString()).append(outcome.toString()).append(outcomeodd.toString()).append(System.lineSeparator());
+                    text.append(counter++).append(": Sport event: ").append(this.title).append(" (start: ").append(getStartDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append(") ").append(bet.toString()).append(outcome.toString()).append(outcomeodd.toString()).append(System.lineSeparator());
                 }
             }
         }
 
         return text.toString();
 
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
     }
 
     public static class SportEventBuilder

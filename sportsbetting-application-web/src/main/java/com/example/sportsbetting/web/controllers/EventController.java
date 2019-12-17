@@ -10,18 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Controller
 public class EventController {
 
     @Autowired
-    private SportsBettingService sportsBettingService;
+    private SportsBettingService service;
 
     @RequestMapping(value = {"/events"}, method = RequestMethod.GET)
     public ModelAndView events() {
         ModelMap model = new ModelMap();
 
-        model.addAttribute("sportevents",sportsBettingService.findAllSportEvents());
+        model.addAttribute("sportevents", service.findAllSportEvents());
 
         return new ModelAndView("events",model);
     }
@@ -30,18 +31,19 @@ public class EventController {
     public ModelAndView addWager(String amount,String id) {
 
         try {
-
-        sportsBettingService.saveWager(new Wager.WagerBuilder()
-                .setOutcomeOdd(sportsBettingService.findOutcomeOddById(Integer.parseInt(id)))
-                .setAmount(new BigDecimal(amount)).getWager());
-
-
-        } catch (Exception e) {
+                service.saveWager(new Wager.WagerBuilder()
+                .setOutcomeOdd(service.findOutcomeOddById(Integer.parseInt(id)))
+                .setAmount(new BigDecimal(amount))
+                .setCurrency(service.FindPlayer().getCurrency())
+                .setTimestampCreated(LocalDateTime.now())
+                .setPlayer(service.FindPlayer())
+                .getWager());
+        }
+        catch (Exception e) {
 
             System.out.println(e.getMessage());
 
         }
         return new ModelAndView("redirect:/");
     }
-
 }
