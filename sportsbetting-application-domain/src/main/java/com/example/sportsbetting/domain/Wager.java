@@ -32,6 +32,11 @@ public class Wager {
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
+    public Wager()
+    {
+
+    }
+
     public Wager(WagerBuilder wagerbuilder)
     {
         this.amount = wagerbuilder.getAmount();
@@ -66,6 +71,10 @@ public class Wager {
                 + this.outcomeOdd.getOutcome().getBet().getSportEvent().getTitle() + " [odd: " + this.getOutcomeOdd().getValue() + " amount: "
                 + this.getAmount() + "]";
 
+    }
+
+    public int getId() {
+        return id;
     }
 
     public static  class WagerBuilder

@@ -1,5 +1,6 @@
 package com.example.sportsbetting.domain;
 
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -13,6 +14,8 @@ public class Data {
     private List<SportEvent> sportEvents;
 
     private List<Wager> wagers;
+
+
 
     public Data()
     {

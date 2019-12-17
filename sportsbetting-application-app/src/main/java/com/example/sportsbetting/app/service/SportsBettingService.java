@@ -1,7 +1,7 @@
 package com.example.sportsbetting.app.service;
 
 import com.example.sportsbetting.domain.*;
-import com.example.sportsbetting.repository.Resultrepository;
+import com.example.sportsbetting.repository.PlayerRepository;
 import com.example.sportsbetting.repository.SportEventRepository;
 import com.example.sportsbetting.repository.WagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,37 +11,46 @@ import java.util.Random;
 
 public class SportsBettingService {
 
+
+    @Autowired
+    private PlayerRepository playerRepository;
+
+    @Autowired
+    private SportEventRepository sportEventRepository;
+
+    @Autowired
+    private WagerRepository wagerRepository;
+
     @Autowired
     private Data data;
 
-    @Autowired
-    WagerRepository wagerRepository;
+    public void SaveSportEvents()
+    {
+        sportEventRepository.saveAll(data.getSportEvents());
+    }
 
-    @Autowired
-    Resultrepository resultRepository;
 
 
 
     public void savePlayer(Player player)
     {
-        data.setPlayer(player);
-
+      playerRepository.save(player);
     }
 
     public Player FindPlayer()
     {
-       return data.getPlayer();
+         return playerRepository.findById(0).get();
     }
 
     public List<SportEvent> findAllSportEvents()
     {
-        return data.getSportEvents();
+        return (List<SportEvent>) sportEventRepository.findAll();
     }
 
     public void saveWager(Wager wager)
     {
-        data.addWager(wager);
-        data.getPlayer().setBalance(data.getPlayer().getBalance().subtract(wager.getAmount()));
+       wagerRepository.save(wager);
+       FindPlayer().setBalance(FindPlayer().getBalance().subtract(wager.getAmount()));
 
     }
 
@@ -50,26 +59,49 @@ public class SportsBettingService {
         return (List<Wager>)wagerRepository.findAll();
     }
 
-    public Data getData()
-    {
-        return this.data;
-    }
 
     public void calculateResults()
     {
         Random r = new Random();
 
-        for (Wager wager : data.getWagers())
+        for (Wager wager : findAllWagers())
         {
             if(r.nextBoolean())
             {
                 wager.setWin(true);
-                data.getPlayer().setBalance(data.getPlayer().getBalance().add(wager.getAmount().multiply(wager.getOutcomeOdd().getValue())));
+                FindPlayer().setBalance(FindPlayer().getBalance().add(wager.getAmount().multiply(wager.getOutcomeOdd().getValue())));
             }
             else
             {
                 wager.setWin(false);
             }
         }
+    }
+
+    public OutcomeOdd findOutcomeOddById(int id)
+    {
+        for(SportEvent sportEvent : findAllSportEvents())
+        {
+            for(Bet bet : sportEvent.getBets())
+            {
+                for(Outcome outcome : bet.getOutcomes())
+                {
+                    for(OutcomeOdd outcomeodd : outcome.getOutcomeOdds())
+                    {
+                        if(outcomeodd.getId() == id)
+                        {
+                           return outcomeodd;
+                        }
+
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public void deleteWager(int id)
+    {
+        wagerRepository.deleteById(id);
     }
 }

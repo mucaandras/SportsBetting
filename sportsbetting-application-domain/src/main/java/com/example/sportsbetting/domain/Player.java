@@ -27,7 +27,7 @@ public class Player extends User {
 
     public Player(PlayerBuilder playerBuilder)
     {
-        this.accountNumber = accountCount++;
+        this.setAccountNumber(accountCount++);
         this.setName(playerBuilder.getName());
         this.setBalance(playerBuilder.getBalance());
         this.currency = playerBuilder.getCurrency();
@@ -52,6 +52,22 @@ public class Player extends User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public LocalDateTime getBirth() {
+        return birth;
+    }
+
+    public void setBirth(LocalDateTime birth) {
+        this.birth = birth;
+    }
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public static class PlayerBuilder

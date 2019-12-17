@@ -23,7 +23,7 @@ public class SportEvent {
     @Column(name = "enddate")
     private  LocalDateTime endDate;
 
-    @OneToMany( mappedBy = "sportEvent", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sportEvent", cascade = CascadeType.ALL)
     private List<Bet> bets;
 
     @OneToOne

@@ -57,6 +57,10 @@ public class OutcomeOdd {
         return " Actual odd: " + this.value + ", Valid between: " + this.validFrom.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) +  " and " + this.validUntil.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
+    public int getId() {
+        return id;
+    }
+
     public static  class OutcomeOddBuilder
     {
         private BigDecimal value;

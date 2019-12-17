@@ -20,7 +20,7 @@ public class Bet {
     @Enumerated(EnumType.STRING)
     private BetType betType;
 
-    @OneToMany(mappedBy = "bet", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "bet", cascade = CascadeType.ALL)
     private List<Outcome> outcomes;
 
     public Bet(){

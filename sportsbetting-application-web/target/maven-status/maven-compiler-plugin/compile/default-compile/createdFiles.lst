@@ -1,6 +1,8 @@
-com/example/sportsbetting/web/configuration/security/SecurityInitializer.class
-com/example/sportsbetting/web/configuration/WebConfig.class
 com/example/sportsbetting/web/controllers/HomePageController.class
-com/example/sportsbetting/web/configuration/WebInitializer.class
+com/example/sportsbetting/web/configuration/JpaConfig.class
 com/example/sportsbetting/web/controllers/LoginController.class
 com/example/sportsbetting/web/configuration/security/SecurityConfig.class
+com/example/sportsbetting/web/configuration/security/SecurityInitializer.class
+com/example/sportsbetting/web/configuration/WebConfig.class
+com/example/sportsbetting/web/controllers/EventController.class
+com/example/sportsbetting/web/configuration/WebInitializer.class

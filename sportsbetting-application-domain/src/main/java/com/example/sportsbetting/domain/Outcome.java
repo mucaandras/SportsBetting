@@ -16,7 +16,7 @@ public class Outcome {
     @ManyToOne
     private Bet bet;
 
-    @OneToMany(mappedBy = "outcome", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "outcome", cascade = CascadeType.ALL)
     private List<OutcomeOdd> outcomeOdds;
 
     public Outcome(){

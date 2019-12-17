@@ -24,7 +24,7 @@ public class App {
     public void play()
     {
         createPlayer();
-        doBetting();
+       // doBetting();
         calculateResults();
         printResults();
     }
@@ -36,7 +36,7 @@ public class App {
         view.printBalance(service.FindPlayer());
     }
 
-    private void doBetting()
+    /*private void doBetting()
     {
         List<SportEvent> events = service.findAllSportEvents();
         while (service.getData().getPlayer().getBalance().compareTo(BigDecimal.ZERO)
@@ -56,7 +56,7 @@ public class App {
                 view.printBalance(service.getData().getPlayer());
             }
         }
-    }
+    } */
 
     private void calculateResults()
     {
