@@ -58,6 +58,11 @@ public class App {
                 service.saveWager(wager);
                 view.printBalance(service.FindPlayer());
             }
+            else
+            {
+                view.notEnoughBalance();
+                break;
+            }
         }
     }
 

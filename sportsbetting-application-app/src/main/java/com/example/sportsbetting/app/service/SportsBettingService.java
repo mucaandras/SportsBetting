@@ -54,7 +54,12 @@ public class SportsBettingService {
     public void saveWager(Wager wager)
     {
        wagerRepository.save(wager);
-       FindPlayer().setBalance(FindPlayer().getBalance().subtract(wager.getAmount()));
+
+       Player player = FindPlayer();
+
+       player.setBalance(FindPlayer().getBalance().subtract(wager.getAmount()));
+
+       savePlayer(player);
 
     }
 
@@ -73,12 +78,14 @@ public class SportsBettingService {
             if(r.nextBoolean())
             {
                 wager.setWin(true);
+
                 FindPlayer().setBalance(FindPlayer().getBalance().add(wager.getAmount().multiply(wager.getOutcomeOdd().getValue())));
             }
             else
             {
                 wager.setWin(false);
             }
+            wager.setProcessed(true);
         }
     }
 

@@ -59,18 +59,7 @@ public class SportEvent {
     {
         StringBuilder text = new StringBuilder();
 
-        int counter = 1;
-
-        for (Bet bet : bets)
-        {
-            for(Outcome outcome : bet.getOutcomes())
-            {
-                for(OutcomeOdd outcomeodd : outcome.getOutcomeOdds())
-                {
-                    text.append(counter++).append(": Sport event: ").append(this.title).append(" (start: ").append(getStartDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append(") ").append(bet.toString()).append(outcome.toString()).append(outcomeodd.toString()).append(System.lineSeparator());
-                }
-            }
-        }
+        text.append(": Sport event: ").append(this.title).append(" (start: ").append(getStartDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append(") ");
 
         return text.toString();
 

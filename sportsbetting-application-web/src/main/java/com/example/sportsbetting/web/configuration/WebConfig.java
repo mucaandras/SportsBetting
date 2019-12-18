@@ -36,8 +36,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/resources/**").addResourceLocations("classpath:/public/");
     }
 
-
-
     @Bean("messageSource")
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource=new ReloadableResourceBundleMessageSource();

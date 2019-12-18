@@ -9,18 +9,11 @@ import java.util.List;
 
 public class Data {
 
-    private Player player;
-
     private List<SportEvent> sportEvents;
-
-    private List<Wager> wagers;
-
-
 
     public Data()
     {
         this.sportEvents = new ArrayList<>();
-        this.wagers = new ArrayList<>();
     }
 
     public void generateTestData()
@@ -118,14 +111,6 @@ public class Data {
 
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     public List<SportEvent> getSportEvents() {
         return new ArrayList<SportEvent>(sportEvents);
     }
@@ -134,11 +119,4 @@ public class Data {
         this.sportEvents = sportEvents;
     }
 
-    public List<Wager> getWagers() {
-        return new ArrayList<Wager>(wagers);
-    }
-
-    public void addWager(Wager wager) {
-        this.wagers.add(wager);
-    }
 }

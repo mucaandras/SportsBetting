@@ -101,7 +101,7 @@
                     </div>
                     <input type="text" class="form-control" id="balance" name="balance" value="${player.balance.intValue()}">
                 </div>
-                <input class="btn btn-primary " class="button" type="submit" value="<spring:message code=" player.save "/>">
+                <input class="btn btn-primary " class="button" type="submit" value="<spring:message code="player.save"/>">
             </form>
 
         </div>
@@ -147,7 +147,7 @@
                         <td class="align-middle text-center">
                             <form action="/deleteWager" method="post">
                                 <input type="hidden" value="${wager.id}" name="id" id="id">
-                                <input class="btn btn-primary" class="button" type="submit" value="<spring:message code=" app.remove "/>">
+                                <input class="btn btn-primary" class="button" type="submit" value="<spring:message code="app.remove"/>">
                             </form>
                         </td>
                         <td class="align-middle text-center">${wager.id}</td>

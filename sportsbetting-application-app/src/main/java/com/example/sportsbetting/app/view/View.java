@@ -56,9 +56,20 @@ public class View {
     public void printOutcomeOdds(List<SportEvent> sportEvents)
     {
         System.out.println(messageSource.getMessage("view.askbet",null,locale));
-        for (SportEvent item : sportEvents)
+        int count = 1;
+        for (SportEvent event : sportEvents)
         {
-            System.out.println(item);
+            for (Bet bet : event.getBets())
+            {
+                for (Outcome outcome : bet.getOutcomes())
+                {
+                    for (OutcomeOdd outcomeOdd : outcome.getOutcomeOdds())
+                    {
+                        System.out.println(count + ": " + event.toString() + bet.toString() + outcome.toString() + outcomeOdd.toString());
+                        count++;
+                    }
+                }
+            }
         }
     }
 
@@ -109,6 +120,11 @@ public class View {
     public void printWagerSaved(Wager wager)
     {
         System.out.println(wager.toString() + " saved!");
+    }
+
+    public void notEnoughBalance()
+    {
+        System.out.println(messageSource.getMessage("view.notenoughbalance",null,locale));
     }
 
     public void printResults(Player player,List<Wager> wagers)
